@@ -1,6 +1,6 @@
 fig:nice-fig
 tab:nice-tab
-prerequisites
+matrix-calculation-for-data-science
 intro
 literature
 methods

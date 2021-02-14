@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
 
-<meta name="author" content="Yohn Jairo Parra Bautista and Carlos Theran" />
+<meta name="author" content="Yohn Jairo Parra-Bautista and Carlos Theran-Suarez" />
 
 
 <meta name="date" content="2021-02-14" />
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Matrix Calculation for Data Science</a></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
@@ -166,18 +166,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Hands-On Research: Data Science and Machine Learning Applications for Images and Behavior Analysis</h1>
-<p class="author"><em>Yohn Jairo Parra Bautista and Carlos Theran</em></p>
+<p class="author"><em>Yohn Jairo Parra-Bautista and Carlos Theran-Suarez</em></p>
 <p class="date"><em>2021-02-14</em></p>
 </div>
-<div id="prerequisites" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+<div id="matrix-calculation-for-data-science" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Matrix Calculation for Data Science</h1>
+<p>Matrix calculation is one of the <em>main knowledge</em> required in several field to <strong>solve problems</strong> that involve several unknown variables. For example, in chemistry we have the following problem;</p>
+<ol style="list-style-type: decimal">
+<li>A chemist need to make 2 liters of a <span class="math inline">\(15\%\)</span> acid solution from <span class="math inline">\(10\%\)</span> acid solution and a <span class="math inline">\(35\%\)</span> acid solution. How many liters of each should the chemist mix to get the desired solution?</li>
+</ol>
+<p><img src="chemical.png" alt="chemical" />
+In Bioengineering, matrix calculation is also an important tool for different application. For example,</p>
+<ol start="2" style="list-style-type: decimal">
+<li>A biologist needs to run three different experiments using three elemental compounds; sodium pyruvate (<span class="math inline">\(x_1\)</span>), glutamine (<span class="math inline">\(x_2\)</span>), and glucose (<span class="math inline">\(x_3\)</span>) to support cells growth. For the first, second and thirds experiments, the biologist has modeled the growth of the cell as follow <span class="math inline">\(x_1+2x_2+6x_3=8\)</span> give a growing rate of 8 cells per hours, <span class="math inline">\(x_1-x_2+4x_3=5\)</span> give a growing rate of 5 cells per hours, and <span class="math inline">\(2x_1+x_2+10x_3=13\)</span> give a growing rate of 13 cells per hours, respectively. If we define each variable as the amount of concentration (mass/volume), what is the amount of concentration required for each experiment to obtain the given growing rate?</li>
+</ol>
+<p><img src="growing%20rate.png" alt="growing rate" />
+3. Google’s Page rank is one of the main application of matrix computation, in particular its search engine uses . At the early of google, its engine used to deliver the most relevant result for our search queries. Let see this case,</p>
 
 </div>
             </section>
