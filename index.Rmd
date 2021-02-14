@@ -1,5 +1,5 @@
 --- 
-title: "Data Science Practical Research Approach"
+title: "Hands-On Research:  Data Science and Machine Learning Applications for Images and Behavior Analysis "
 author: "Yohn Jairo Parra Bautista and Carlos Theran"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
