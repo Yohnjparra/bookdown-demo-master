@@ -1,6 +1,7 @@
 fig:nice-fig
 tab:nice-tab
 matrix-calculation-for-data-science
+vectors-matrices-and-simple-operations
 intro
 literature
 methods

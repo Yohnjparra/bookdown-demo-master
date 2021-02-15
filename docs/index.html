@@ -134,7 +134,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Matrix Calculation for Data Science</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Matrix Calculation for Data Science</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#vectors-matrices-and-simple-operations"><i class="fa fa-check"></i><b>1.1</b> Vectors, Matrices and simple Operations</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
@@ -182,7 +184,274 @@ In Bioengineering, matrix calculation is also an important tool for different ap
 </ol>
 <p><img src="growing%20rate.png" alt="growing rate" />
 3. Google’s Page rank is one of the main application of matrix computation, in particular its search engine uses . At the early of google, its engine used to deliver the most relevant result for our search queries. Let see this case,</p>
+<p><img src="LinkPages.png" alt="linkPages" />
+Google engineers assumed each of these pages is related in some way to the other pages, since there is at least one link to and from each page in the web.</p>
+<p>Their task was to find the “most important” page for a particular search query, as indicated by the writers of all 6 pages. For example, if everyone linked to Page 1, and it was the only one that had 5 incoming links, then it would be easy - Page 1 would be returned at the top of the search result.</p>
+<p>However, we can see some pages in our web are not regarded as very important. For example, Page 3 has only one incoming link. Should its outgoing link (to Page 5) be worth the same as Page 1’s outgoing link to Page 5?</p>
+<p>The beauty of PageRank was that it regarded pages with many incoming links (especially from other popular pages) as more important than those from mediocre pages, and it gave more weighting to the outgoing links of important pages.</p>
+<p>In this section we are going to work with matrices operation such as addition, subtraction, multiplication, point-wise multiplication, and eigenvalues-eigenvector computation. Also, we are going to learn how to compute the determinant of a matrix and the inverse of a matrix. More over, we will cover singular value decomposition. These concepts and properties allow us to solve linear system equation of the form <span class="math inline">\(Ax\approx b\)</span>, where <span class="math inline">\(A\in\mathbf{R^{n\times m}}\)</span> is a matrix, <span class="math inline">\(x\in\mathbf{R}^{m\times1}\)</span> is a vector, and <span class="math inline">\(b\in\mathbf{R^{n\times 1}}\)</span>.</p>
+<div id="vectors-matrices-and-simple-operations" class="section level2">
+<h2><span class="header-section-number">1.1</span> Vectors, Matrices and simple Operations</h2>
+<p>A vector in <span class="math inline">\(m\)</span> dimension (an <span class="math inline">\(m\)</span>-vector) <span class="math inline">\(\textbf{x}\)</span> is defined as an <span class="math inline">\(m\)</span>-tuple of real numbers, which are the  of <span class="math inline">\(\textbf{x}\)</span>. We write a vector as a column enclosed in square brackets:</p>
+<p><span class="math display">\[\begin{equation}
+    \textbf{x}= 
+      \begin{bmatrix}
+      x_1 \\
+      x_2 \\
+      \vdots \\
+      x_m
+      \end{bmatrix}
+\end{equation}\]</span></p>
+<p>Matrices <span class="math inline">\(A\)</span> is a 2-D array of numbers. In other words, <span class="math inline">\(A\in\mathbf{R^{m\times n}}\)</span> is a square arrangement if <span class="math inline">\(m=n\)</span>, and it is a rectangular arrangement if <span class="math inline">\(m\ne n\)</span>. We write a matrix as follow</p>
+<p><span class="math display">\[\begin{equation}
+    A= 
+      \begin{bmatrix}
+        A_{11}&amp; A_{12} &amp;\dots &amp;A_{1n}\\
+        A_{21}&amp; A_{22} &amp;\dots &amp;A_{2n}\\
+        \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\
+        A_{m1}&amp; A_{m2} &amp;\dots &amp;A_{mn}
+      \end{bmatrix}
+\end{equation}\]</span>
+One important operation on matrices is the . The transpose of a matrix can be defined as the mirror image of the matrix across a diagonal line, called the . By transposition of the matrix <span class="math inline">\(A\in\mathbf{R^{m\times n}}\)</span>, a new matrix <span class="math inline">\(A^T\in\mathbf{R^{n\times m}}\)</span> is obtained. The transpose of a matrix is represents as
+<span class="math display">\[\begin{equation*}
+A^T_{ik} = A_{ki}
+\end{equation*}\]</span>
+On the other hand, under transposition a column vector becomes a .
+<span class="math display">\[\textbf{x}^T=[x_1, x_2, \ldots, x_m]\]</span></p>
+<p>In other words, if a column vector is an <span class="math inline">\(m\times 1\)</span> matrix, then its transpose is a <span class="math inline">\(1\times m\)</span> matrix.</p>
 
+<p>For matrices one has the following elementary rules for  and </p>
+<p><span class="math display">\[\begin{equation*}
+    A\pm B = C, \hspace{2cm} C_{ik}=A_{ik}\pm B_{ik}
+\end{equation*}\]</span>
+<span class="math display">\[\begin{equation*}
+    \alpha A =B, \hspace{2cm} B_{ik}=\alpha A_{ik}
+\end{equation*}\]</span></p>
+<p>Now the product <span class="math inline">\(AB\)</span> of two matrices is well-defined if the number of columns of the <span class="math inline">\(A\)</span> is equal to the number of row of <span class="math inline">\(B\)</span>, e.g. <span class="math inline">\(A=A_{m\times l}\)</span> and <span class="math inline">\(B=B_{l\times m}\)</span>.</p>
+<p><span class="math display">\[\begin{equation*}
+ AB=C,\hspace{2cm} C_{ik}=\sum_{j=1}^{l}A_{ij}B_{jk}
+\end{equation*}\]</span></p>
+<p>Other important properties that involve the multiplication operation is that the transpose operation. The transpose operation is a transformation of row per columns, let see the following example.</p>
+<p><span class="math display">\[\begin{equation*}
+    A= 
+      \begin{bmatrix}
+        2&amp; 3 &amp;5&amp;8\\
+        7&amp;10&amp;25&amp;1\\
+        9&amp;12&amp;6&amp;8\\
+        3&amp;2&amp;1&amp;5
+      \end{bmatrix}
+\end{equation*}\]</span>
+then
+<span class="math display">\[\begin{equation*}
+    A^T= 
+      \begin{bmatrix}
+        2&amp;7&amp;9&amp;3\\
+        3&amp;10&amp;12&amp;2\\
+        5&amp;25&amp;6&amp;1\\
+        8&amp;1&amp;8&amp;5
+      \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>The following property involve the transpose and multiplication operation between two matrices.</p>
+<p><span class="math display">\[\begin{equation*}
+ C^T=(AB)^T=B^TA^T
+\end{equation*}\]</span></p>
+<p>In other hand, for vector we have <span class="math inline">\(a\cdot b=a^Tb=c\)</span>, it means
+<span class="math display">\[c=\sum_{j=1}^{m} a_jb_j\]</span>.</p>
+<p>Note: The matrix multiplication is not commutative, therefore <span class="math inline">\(AB\neq BA\)</span>. But the dot product between two vectors is commutative <span class="math inline">\(x^Ty=y^Tx\)</span>.</p>
+<p>The  of an <span class="math inline">\(n\times n\)</span> matrix is a numerical value computed using the elements of a matrix. To compute the determinant of a <span class="math inline">\(2\times 2\)</span> the following formula is used.</p>
+<p><span class="math display">\[\begin{equation*}
+    det(A)=det 
+      \begin{bmatrix}
+        a&amp;b\\
+        c&amp;d\\
+      \end{bmatrix}
+      = ad-bc
+\end{equation*}\]</span></p>
+<p>The determinant of a <span class="math inline">\(3\times 3\)</span> matrix is given by
+<span class="math display">\[\begin{equation*}
+    det(A)=det 
+      \begin{bmatrix}
+        a&amp; b &amp;c\\
+        d&amp;e&amp;f\\
+        g&amp;h&amp;i\\
+      \end{bmatrix}
+      = aei+bfg+cdh-afh-bdi-ceg.
+\end{equation*}\]</span></p>
+
+<p>Different world’s problems have been solve by a power full property of some metrices called . This matrix inversion enables us to solve system linear equation, later we are going to adapt a system linear equation into a matrix equation of the form <span class="math inline">\(Ax=b\)</span>, where <span class="math inline">\(A\)</span> is a  matrix, and <span class="math inline">\(x,b\)</span> are vectors.</p>
+<p>First lets define the concept of . An identity matrix is a matrix whose entries on its diagonal are ones, and the rests of its entries are zeros. The mathematical definition can be as follows,
+<span class="math display">\[\begin{equation}
+I_{i,j}=\left\{
+                \begin{array}{ll}
+                  1, \hspace{0.3cm}if\hspace{0.5cm} i=j.\\
+                  0, \hspace{0.5cm} otherwise.
+                \end{array}
+              \right.
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(I=(I_{i,j})\)</span> and <span class="math inline">\(I\in\mathbf{R}^{n\times n}\)</span>. Formally, if <span class="math inline">\(I_n\in\mathbf{R}^{n\times n}\)</span>, and <span class="math inline">\(\forall x\in\mathbf{R}^n\)</span>, <span class="math inline">\(I_nx=x\)</span>.</p>
+<p>Now, lets define the inverse of a matrix <span class="math inline">\(A\)</span>. The matrix inverse of <span class="math inline">\(A\in\mathbf{R}^{n\times n}\)</span> is denoted as <span class="math inline">\(A^{-1}\)</span>, and it is defined as the matrix such <span class="math inline">\(A^{-1}A=I_n\)</span></p>
+<p>To solve a linear system using matrix notation, we must to defined the matrix of coefficient.</p>
+<p>Then, compute the inverse of a <span class="math inline">\(2\times2\)</span> matrix</p>
+<p><span class="math display">\[\begin{equation*}
+    A^{-1}= 
+      \begin{bmatrix}
+        a&amp;b\\
+        c&amp;d\\
+      \end{bmatrix}=
+      \frac{1}{ad-bc}
+      \begin{bmatrix}
+        d&amp;-b\\
+        -c&amp;a\\
+      \end{bmatrix}
+\end{equation*}\]</span></p>
+<p>To compute the inverse of a <span class="math inline">\(3\times 3\)</span> matrix the following formula is used.</p>
+<p><span class="math display">\[\begin{equation*}
+    A^{-1}= 
+      \begin{bmatrix}
+        a&amp;b&amp;c\\
+        d&amp;f&amp;g\\
+        g&amp;h&amp;i
+      \end{bmatrix}=
+      \frac{1}{D}
+      \begin{bmatrix}
+        ei-fh&amp;ch-bi&amp;bf-ce\\
+        fg-di&amp;ai-cg&amp;cd-af\\
+        dh-eg&amp;bg-ah&amp;ae-bd
+      \end{bmatrix}
+\end{equation*}\]</span>
+Where <span class="math inline">\(D=aei+bfg+cdh-afh-bdi-ceg\)</span>.</p>
+<p>Note: A square matrix <span class="math inline">\(A\)</span> is invertible if and only if its determinant non-zero.</p>
+
+<p>In several field of science, one task is to find all the numbers <span class="math inline">\(\lambda\)</span> and all vectors <span class="math inline">\(v\)</span> that satisfy the equation.</p>
+<p><span class="math display">\[\begin{equation}
+    Av=\lambda v
+\end{equation}\]</span></p>
+<p>Where A is a square matrix. Any number <span class="math inline">\(\lambas\)</span> that satisfy 4, is called  of <span class="math inline">\(A\)</span>. A vector <span class="math inline">\(v\)</span> satisfying 4 is called eigenvector of <span class="math inline">\(A\)</span>. The eigenvalues <span class="math inline">\(\lambda\)</span> are compute solving the following equation
+<span class="math inline">\(det(A-\lambda I)=0\)</span>
+Where for every <span class="math inline">\(\Lambda\)</span> that is found as a solution of 4, the corresponding set of eigenvector <span class="math inline">\(v\)</span> is found from 4.\</p>
+<p>Computing matrices operation could be an easy task if we used the right tools. In this course, we will use Jupyther notebook, which is an interface that helps us write code in python language . For the following exercises use Jupyter Notebook to complete each task.
+<a href="https://www.programiz.com/python-programming/matrix" class="uri">https://www.programiz.com/python-programming/matrix</a></p>
+<p>Now, we are ready to solve the chemist, biology, and google’s page rank problems. Let’s start solving chemist’s problem. \</p>
+. The chemist need to make 2 liter of a <span class="math inline">\(15\%\)</span> of acid solution. If you analyse the problem, the desire solution contains two acid solution. which they are
+
+<p>Consequently, we get the following linear system equation</p>
+<p><span class="math display">\[\begin{equation}
+            \left\{
+                \begin{array}{ll}
+                  x+y=2\\
+                  0.10x+0.35y=0.15(2)
+                \end{array}
+              \right.
+               \label{eqn:chemist_system}
+\end{equation}\]</span></p>
+<p>Multiplying the second equation in  by 10.</p>
+<p><span class="math display">\[\begin{equation}
+            \left\{
+                \begin{array}{ll}
+                  x+y=2\\
+                  10x+35y=30
+                \end{array}
+              \right.
+              \label{eqn:mulpBy10}
+\end{equation}\]</span></p>
+<p>From the equation , the following matrix system is generated.</p>
+<p><span class="math display">\[\begin{equation*}
+      \begin{bmatrix}
+        1&amp;1\\
+        10&amp;35\\
+      \end{bmatrix}
+      \begin{bmatrix}
+        x\\
+        y\\
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        2\\
+        30\\
+      \end{bmatrix}
+
+\end{equation*}\]</span></p>
+<p>Let’s use Python to solve this linear system. To start using python you must to download and install it from <a href="https://www.python.org/downloads/" class="uri">https://www.python.org/downloads/</a>. Now, to use the linear algebra package, we must to installs  library <a href="https://numpy.org/install/" class="uri">https://numpy.org/install/</a>. In this class we are going to work with Jupyther Notebook which can be install from <a href="https://jupyter.org/install" class="uri">https://jupyter.org/install</a>.</p>
+
+<ol style="list-style-type: decimal">
+<li>Find the sum of the following two matrices.</li>
+</ol>
+<p><span class="math display">\[\begin{equation*}
+      \begin{bmatrix}
+        5&amp; -4 &amp; 0\\
+        -2 &amp; 4 &amp; 3\\
+      \end{bmatrix}
+      and
+      \begin{bmatrix}
+        -2&amp; 4 &amp; 3\\
+        3 &amp; 0 &amp; -5\\
+      \end{bmatrix}
+\end{equation*}\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>The scalar product of a constant and matrix. Find the following product if <span class="math inline">\(\lambda=3\)</span>.</li>
+</ol>
+<p><span class="math display">\[\begin{equation*}
+      \begin{bmatrix}
+        3&amp; 0 &amp; 3\\
+        2 &amp; 2 &amp; -4\\
+      \end{bmatrix}
+\end{equation*}\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Compute the product of the two given matrices.</li>
+</ol>
+<p><span class="math display">\[\begin{equation*}
+      \begin{bmatrix}
+        3&amp; 0 &amp; 3\\
+        2 &amp; 2 &amp; -4\\
+      \end{bmatrix}
+      and
+      \begin{bmatrix}
+        1 &amp; -2\\
+        3 &amp; 0\\
+        2 &amp; -1
+      \end{bmatrix}
+\end{equation*}\]</span></p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Find the transpose of a matrix
+<span class="math display">\[\begin{equation*}
+   \begin{bmatrix}
+     4&amp; -1 &amp; 0\\
+     2 &amp; 1 &amp; -3\\
+   \end{bmatrix}
+\end{equation*}\]</span></p></li>
+<li><p>Compute the determinant of the following matrices.
+<span class="math display">\[\begin{equation*}
+   \begin{bmatrix}
+     2&amp;1\\
+     3&amp;-1\\
+   \end{bmatrix}
+   and
+  \begin{bmatrix}
+     2&amp;1&amp;0\\
+     2&amp;4&amp;-1\\
+     3&amp;-1&amp;2
+   \end{bmatrix}
+\end{equation*}\]</span></p></li>
+<li><p>Compute the inverse of the matrix</p></li>
+</ol>
+<p><span class="math display">\[\begin{equation*}
+     \begin{bmatrix}
+        3&amp;0&amp;0\\
+        1&amp;1&amp;2\\
+        -2&amp;0&amp;1
+      \end{bmatrix}
+\end{equation*}\]</span></p>
+<ol start="7" style="list-style-type: decimal">
+<li>Find the eigenvalues and eigenvectors of the following matrix.</li>
+</ol>
+<p><span class="math display">\[\begin{equation*}
+     \begin{bmatrix}
+        5&amp;2\\
+        2&amp;2\\
+      \end{bmatrix}
+\end{equation*}\]</span></p>
+
+</div>
 </div>
             </section>
 
