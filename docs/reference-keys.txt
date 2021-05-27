@@ -9,3 +9,4 @@ applications
 example-one
 example-two
 final-words
+matrix-calculation-for-data-science-and-ai

@@ -12,7 +12,7 @@ github-repo: rstudio/bookdown-demo
 description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
 
-# Matrix Calculation for Data Science
+# Matrix Calculation for Data Science and AI
 
 Matrix calculation is one of the _main knowledge_ required in several field to **solve problems** that involve several unknown variables. For example, in chemistry we have the following problem;
 
